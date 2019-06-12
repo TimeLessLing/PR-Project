@@ -1,0 +1,134 @@
+Script started on Wednesday, June 12, 2019 PM07:12:26 CST
+lbd2020@PrisLisi2:~/PRproject/svm$ python3 svm.py
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+2019-06-12 19:12:37
+/usr/local/lib/python3.5/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+2019-06-12 19:28:48
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+Traceback (most recent call last):
+  File "svm.py", line 46, in <module>
+    print("Accuracy:{.2f}%".foramt(100 * model_svc.score(x_test,y_pred)))
+AttributeError: 'str' object has no attribute 'foramt'
+lbd2020@PrisLisi2:~/PRproject/svm$ python3 svm.py[4Pnvidia-smipython3 svm.py[Kvim svm.py
+[?1049h[?1h=[1;64r[34l[34h[?25h[23m[24m[0m[H[J[?25l[64;1H"svm.py" [noeol] 47L, 1857C[1;1H[35mimport[0m numpy [33mas[0m np
+[35mimport[0m struct
+[35mimport[0m matplotlib.pyplot [33mas[0m plt
+[35mimport[0m os
+[34m##加载svm模型[0m
+[35mfrom[0m sklearn [35mimport[0m svm
+[34m###用于做数据预处理[0m
+[35mfrom[0m sklearn [35mimport[0m preprocessing
+[35mimport[0m time
+path=[31m'./mnist'[0m
+[33mdef[0m [36mload_mnist_train[0m(path, kind=[31m'train'[0m):
+    labels_path = os.path.join(path,[31m'%s-labels.idx1-ubyte'[0m% kind)
+    images_path = os.path.join(path,[31m'%s-images.idx3-ubyte'[0m% kind)
+    [33mwith[0m [36mopen[0m(labels_path, [31m'rb'[0m) [33mas[0m lbpath:[15;9Hmagic, n = struct.unpack([31m'>II'[0m,lbpath.read([31m8[0m))[16;9Hlabels = np.fromfile(lbpath,dtype=np.uint8)
+    [33mwith[0m [36mopen[0m(images_path, [31m'rb'[0m) [33mas[0m imgpath:[18;9Hmagic, num, rows, cols = struct.unpack([31m'>IIII'[0m,imgpath.read([31m16[0m))[19;9Himages = np.fromfile(imgpath,dtype=np.uint8).reshape([36mlen[0m(labels), [31m784[0m)
+    [33mreturn[0m images, labels
+[33mdef[0m [36mload_mnist_test[0m(path, kind=[31m't10k'[0m):
+    labels_path = os.path.join(path,[31m'%s-labels.idx1-ubyte'[0m% kind)
+    images_path = os.path.join(path,[31m'%s-images.idx3-ubyte'[0m% kind)
+    [33mwith[0m [36mopen[0m(labels_path, [31m'rb'[0m) [33mas[0m lbpath:[25;9Hmagic, n = struct.unpack([31m'>II'[0m,lbpath.read([31m8[0m))[26;9Hlabels = np.fromfile(lbpath,dtype=np.uint8)
+    [33mwith[0m [36mopen[0m(images_path, [31m'rb'[0m) [33mas[0m imgpath:[28;9Hmagic, num, rows, cols = struct.unpack([31m'>IIII'[0m,imgpath.read([31m16[0m))[29;9Himages = np.fromfile(imgpath,dtype=np.uint8).reshape([36mlen[0m(labels), [31m784[0m)
+    [33mreturn[0m images, labels
+train_images,train_labels=load_mnist_train(path)
+test_images,test_labels=load_mnist_test(path)
+
+X=preprocessing.StandardScaler().fit_transform(train_images)
+X_train=X[[31m0[0m:[31m60000[0m]
+y_train=train_labels[[31m0[0m:[31m60000[0m]
+
+[36mprint[0m(time.strftime([31m'%Y-%m-%d %H:%M:%S'[0m))
+model_svc = svm.SVC()
+model_svc.fit(X_train,y_train)
+[36mprint[0m(time.strftime([31m'%Y-%m-%d %H:%M:%S'[0m))
+
+x=preprocessing.StandardScaler().fit_transform(test_images)
+x_test=x[[31m0[0m:[31m10000[0m]
+y_pred=test_labels[[31m0[0m:[31m10000[0m]
+[36mprint[0m([31m"Accuracy:{.2f}%"[0m.foramt([31m100[0m * model_svc.score(x_test,y_pred)))
+y=model_svc.predict(x_test)
+[1m[34m~                                                                                                                                                                                                                                                    [49;1H~                                                                                                                                                                                                                                                    [50;1H~                                                                                                                                                                                                                                                    [51;1H~                                                                                                                                                                                                                                                    [52;1H~                                                                                                                                                                                                                                                    [53;1H~                                                                                                                                                                                                                                                    [54;1H~                                                                                                                                                                                                                                                    [55;1H~                                                                                                                                                                                                                                                    [56;1H~                                                                                                                                                                                                                                                    [57;1H~                                                                                                                                                                                                                                                    [58;1H~                                                                                                                                                                                                                                                    [59;1H~                                                                                                                                                                                                                                                    [60;1H~                                                                                                                                                                                                                                                    [61;1H~                                                                                                                                                                                                                                                    [62;1H~                                                                                                                                                                                                                                                    [63;1H~                                                                                                                                                                                                                                                    [0m[64;228H1,1[11CAll[1;1H[34h[?25h[?25l[64;228H2[2;1H[34h[?25h[?25l[64;228H3[3;1H[34h[?25h[?25l[64;228H4[4;1H[34h[?25h[?25l[64;228H5[5;1H[34h[?25h[?25l[64;228H6[6;1H[34h[?25h[?25l[64;228H7[7;1H[34h[?25h[?25l[64;228H8[8;1H[34h[?25h[?25l[64;228H9[9;1H[34h[?25h[?25l[64;228H10,1[10;1H[34h[?25h[?25l[64;229H1[11;1H[34h[?25h[?25l[64;229H2[12;1H[34h[?25h[?25l[64;229H3[13;1H[34h[?25h[?25l[64;229H4[14;1H[34h[?25h[?25l[64;229H5[15;1H[34h[?25h[?25l[64;229H6[16;1H[34h[?25h[?25l[64;229H7[17;1H[34h[?25h[?25l[64;229H8[18;1H[34h[?25h[?25l[64;229H9[19;1H[34h[?25h[?25l[64;228H20[20;1H[34h[?25h[?25l[64;229H1[21;1H[34h[?25h[?25l[64;229H2[22;1H[34h[?25h[?25l[64;229H3[23;1H[34h[?25h[?25l[64;229H4[24;1H[34h[?25h[?25l[64;229H5[25;1H[34h[?25h[?25l[64;229H6[26;1H[34h[?25h[?25l[64;229H7[27;1H[34h[?25h[?25l[64;229H8[28;1H[34h[?25h[?25l[64;229H9[29;1H[34h[?25h[?25l[64;228H30[30;1H[34h[?25h[?25l[64;229H1[31;1H[34h[?25h[?25l[64;229H2[32;1H[34h[?25h[?25l[64;229H3,0-1[33;1H[34h[?25h[?25l[64;229H4,1  [34;1H[34h[?25h[?25l[64;229H5[35;1H[34h[?25h[?25l[64;229H6[36;1H[34h[?25h[?25l[64;229H7,0-1[37;1H[34h[?25h[?25l[64;229H8,1  [38;1H[34h[?25h[?25l[64;229H9[39;1H[34h[?25h[?25l[64;228H40[40;1H[34h[?25h[?25l[64;229H1[41;1H[34h[?25h[?25l[64;229H2,0-1[42;1H[34h[?25h[?25l[64;229H3,1  [43;1H[34h[?25h[?25l[64;229H4[44;1H[34h[?25h[?25l[64;229H5[45;1H[34h[?25h[?25l[64;229H6[46;1H[34h[?25h[?25l[64;231H2[46;2H[34h[?25h[?25l[64;231H3[46;3H[34h[?25h[?25l[64;231H4[46;4H[34h[?25h[?25l[64;231H5[46;5H[34h[?25h[?25l[1C[46m([62C)[0m[64;231H6[46;6H[34h[?25h[?25l([62C)[64;231H7[46;7H[34h[?25h[?25l[64;231H8[46;8H[34h[?25h[?25l[64;231H9[46;9H[34h[?25h[?25l[64;231H10[46;10H[34h[?25h[?25l[64;232H1[46;11H[34h[?25h[?25l[64;232H2[46;12H[34h[?25h[?25l[64;232H3[46;13H[34h[?25h[?25l[64;232H4[46;14H[34h[?25h[?25l[64;232H5[46;15H[34h[?25h[?25l[64;232H6[46;16H[34h[?25h[?25l[1C[31m[46m{[3C}[0m[64;232H7[46;17H[34h[?25h[?25l[31m{.2f}[0m[64;232H8[46;18H[34h[?25h[?25l[64;232H9[46;19H[34h[?25h[?25l[64;231H20[46;20H[34h[?25h[?25l[31m[46m{[3C}[0m[64;232H1[46;21H[34h[?25h[?25l[31m{.2f}[0m[64;232H2[46;22H[34h[?25h[?25l[64;232H3[46;23H[34h[?25h[?25l[64;232H4[46;24H[34h[?25h[?25l[64;232H5[46;25H[34h[?25h[?25l[64;232H6[46;26H[34h[?25h[?25l[64;232H7[46;27H[34h[?25h[?25l[64;232H8[46;28H[34h[?25h[?25l[64;232H9[46;29H[34h[?25h[?25l[64;231H30[46;30H[34h[?25h[?25l[64;1H[1m-- INSERT --[0m[64;13H[K[64;228H46,30[9CAll[46;30H[34h[?25h[?25lt([31m10[0m[1C * model_svc.score(x_test,y_pred)[46;69H[K[64;231H29[46;29H[34h[?25h[?25lt([31m10[0m[1C * model_svc.score(x_test,y_pred)[46;68H[K[64;232H8[46;28H[34h[?25h[?25lmt([31m100[0m * model_svc.score(x_test,y_pred)))[64;232H9[46;29H[34h[?25h[?25lat([31m100[0m * model_svc.score(x_test,y_pred)))[64;231H30[46;30H[34h[?25h[64;1H[K[46;29H[?25l[64;228H46,29[9CAll[46;29H[34h[?25h[?25l[64;228H[K[64;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"svm.py" 47L, 1858C written
+[?1l>[34h[?25h[?1049llbd2020@PrisLisi2:~/PRproject/svm$ vim svm.py[4@python3[C[C[C[C[C[C[C
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+2019-06-12 20:15:05
+/usr/local/lib/python3.5/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+2019-06-12 20:31:36
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+Traceback (most recent call last):
+  File "svm.py", line 46, in <module>
+    print("Accuracy:{.2f}%".format(100 * model_svc.score(x_test,y_pred)))
+AttributeError: 'numpy.float64' object has no attribute '2f'
+lbd2020@PrisLisi2:~/PRproject/svm$ python3 svm.py[4Pvim[C[C[C[C[C[C[C
+[?1049h[?1h=[1;64r[34l[34h[?25h[23m[24m[0m[H[J[?25l[64;1H"svm.py" 47L, 1858C[1;1H[35mimport[0m numpy [33mas[0m np
+[35mimport[0m struct
+[35mimport[0m matplotlib.pyplot [33mas[0m plt
+[35mimport[0m os
+[34m##加载svm模型[0m
+[35mfrom[0m sklearn [35mimport[0m svm
+[34m###用于做数据预处理[0m
+[35mfrom[0m sklearn [35mimport[0m preprocessing
+[35mimport[0m time
+path=[31m'./mnist'[0m
+[33mdef[0m [36mload_mnist_train[0m(path, kind=[31m'train'[0m):
+    labels_path = os.path.join(path,[31m'%s-labels.idx1-ubyte'[0m% kind)
+    images_path = os.path.join(path,[31m'%s-images.idx3-ubyte'[0m% kind)
+    [33mwith[0m [36mopen[0m(labels_path, [31m'rb'[0m) [33mas[0m lbpath:[15;9Hmagic, n = struct.unpack([31m'>II'[0m,lbpath.read([31m8[0m))[16;9Hlabels = np.fromfile(lbpath,dtype=np.uint8)
+    [33mwith[0m [36mopen[0m(images_path, [31m'rb'[0m) [33mas[0m imgpath:[18;9Hmagic, num, rows, cols = struct.unpack([31m'>IIII'[0m,imgpath.read([31m16[0m))[19;9Himages = np.fromfile(imgpath,dtype=np.uint8).reshape([36mlen[0m(labels), [31m784[0m)
+    [33mreturn[0m images, labels
+[33mdef[0m [36mload_mnist_test[0m(path, kind=[31m't10k'[0m):
+    labels_path = os.path.join(path,[31m'%s-labels.idx1-ubyte'[0m% kind)
+    images_path = os.path.join(path,[31m'%s-images.idx3-ubyte'[0m% kind)
+    [33mwith[0m [36mopen[0m(labels_path, [31m'rb'[0m) [33mas[0m lbpath:[25;9Hmagic, n = struct.unpack([31m'>II'[0m,lbpath.read([31m8[0m))[26;9Hlabels = np.fromfile(lbpath,dtype=np.uint8)
+    [33mwith[0m [36mopen[0m(images_path, [31m'rb'[0m) [33mas[0m imgpath:[28;9Hmagic, num, rows, cols = struct.unpack([31m'>IIII'[0m,imgpath.read([31m16[0m))[29;9Himages = np.fromfile(imgpath,dtype=np.uint8).reshape([36mlen[0m(labels), [31m784[0m)
+    [33mreturn[0m images, labels
+train_images,train_labels=load_mnist_train(path)
+test_images,test_labels=load_mnist_test(path)
+
+X=preprocessing.StandardScaler().fit_transform(train_images)
+X_train=X[[31m0[0m:[31m60000[0m]
+y_train=train_labels[[31m0[0m:[31m60000[0m]
+
+[36mprint[0m(time.strftime([31m'%Y-%m-%d %H:%M:%S'[0m))
+model_svc = svm.SVC()
+model_svc.fit(X_train,y_train)
+[36mprint[0m(time.strftime([31m'%Y-%m-%d %H:%M:%S'[0m))
+
+x=preprocessing.StandardScaler().fit_transform(test_images)
+x_test=x[[31m0[0m:[31m10000[0m]
+y_pred=test_labels[[31m0[0m:[31m10000[0m]
+[36mprint[0m([31m"Accuracy:{.2f}%"[0m.format([31m100[0m * model_svc.score(x_test,y_pred)))
+y=model_svc.predict(x_test)
+[1m[34m~                                                                                                                                                                                                                                                    [49;1H~                                                                                                                                                                                                                                                    [50;1H~                                                                                                                                                                                                                                                    [51;1H~                                                                                                                                                                                                                                                    [52;1H~                                                                                                                                                                                                                                                    [53;1H~                                                                                                                                                                                                                                                    [54;1H~                                                                                                                                                                                                                                                    [55;1H~                                                                                                                                                                                                                                                    [56;1H~                                                                                                                                                                                                                                                    [57;1H~                                                                                                                                                                                                                                                    [58;1H~                                                                                                                                                                                                                                                    [59;1H~                                                                                                                                                                                                                                                    [60;1H~                                                                                                                                                                                                                                                    [61;1H~                                                                                                                                                                                                                                                    [62;1H~                                                                                                                                                                                                                                                    [63;1H~                                                                                                                                                                                                                                                    [0m[64;228H1,1[11CAll[1;1H[34h[?25h[?25l[64;228H2[2;1H[34h[?25h[?25l[64;228H3[3;1H[34h[?25h[?25l[64;228H4[4;1H[34h[?25h[?25l[64;228H5[5;1H[34h[?25h[?25l[64;228H6[6;1H[34h[?25h[?25l[64;228H7[7;1H[34h[?25h[?25l[64;228H8[8;1H[34h[?25h[?25l[64;228H9[9;1H[34h[?25h[?25l[64;228H10,1[10;1H[34h[?25h[?25l[64;229H1[11;1H[34h[?25h[?25l[64;229H2[12;1H[34h[?25h[?25l[64;229H3[13;1H[34h[?25h[?25l[64;229H4[14;1H[34h[?25h[?25l[64;229H5[15;1H[34h[?25h[?25l[64;229H6[16;1H[34h[?25h[?25l[64;229H7[17;1H[34h[?25h[?25l[64;229H8[18;1H[34h[?25h[?25l[64;229H9[19;1H[34h[?25h[?25l[64;228H20[20;1H[34h[?25h[?25l[64;229H1[21;1H[34h[?25h[?25l[64;229H2[22;1H[34h[?25h[?25l[64;229H3[23;1H[34h[?25h[?25l[64;229H4[24;1H[34h[?25h[?25l[64;229H5[25;1H[34h[?25h[?25l[64;229H6[26;1H[34h[?25h[?25l[64;229H7[27;1H[34h[?25h[?25l[64;229H8[28;1H[34h[?25h[?25l[64;229H9[29;1H[34h[?25h[?25l[64;228H30[30;1H[34h[?25h[?25l[64;229H1[31;1H[34h[?25h[?25l[64;229H2[32;1H[34h[?25h[?25l[64;229H3,0-1[33;1H[34h[?25h[?25l[64;229H4,1  [34;1H[34h[?25h[?25l[64;229H5[35;1H[34h[?25h[?25l[64;229H6[36;1H[34h[?25h[?25l[64;229H7,0-1[37;1H[34h[?25h[?25l[64;229H8,1  [38;1H[34h[?25h[?25l[64;229H9[39;1H[34h[?25h[?25l[64;228H40[40;1H[34h[?25h[?25l[64;229H1[41;1H[34h[?25h[?25l[64;229H2,0-1[42;1H[34h[?25h[?25l[64;229H3,1  [43;1H[34h[?25h[?25l[64;229H4[44;1H[34h[?25h[?25l[64;229H5[45;1H[34h[?25h[?25l[64;229H6[46;1H[34h[?25h[?25l[64;229H7[47;1H[34h[?25h[?25l[64;229H6[46;1H[34h[?25h[?25l[64;229H5[45;1H[34h[?25h[?25l[64;229H4[44;1H[34h[?25h[?25l[64;229H3[43;1H[34h[?25h[?25l[64;229H2,0-1[42;1H[34h[?25h[?25l[64;229H1,1  [41;1H[34h[?25h[?25l[64;229H0[40;1H[34h[?25h[?25l[64;228H39[39;1H[34h[?25h[?25l[64;229H8[38;1H[34h[?25h[?25l[64;229H7,0-1[37;1H[34h[?25h[?25l[64;229H8,1  [38;1H[34h[?25h[?25l[64;229H9[39;1H[34h[?25h[?25l[64;228H40[40;1H[34h[?25h[?25l[64;229H1[41;1H[34h[?25h[?25l[64;229H2,0-1[42;1H[34h[?25h[?25l[64;229H3,1  [43;1H[34h[?25h[?25l[64;229H4[44;1H[34h[?25h[?25l[64;229H5[45;1H[34h[?25h[?25l[64;229H6[46;1H[34h[?25h[?25l[64;229H7[47;1H[34h[?25h[?25l[64;229H6[46;1H[34h[?25h[?25l[64;231H2[46;2H[34h[?25h[?25l[64;231H3[46;3H[34h[?25h[?25l[64;231H4[46;4H[34h[?25h[?25l[64;231H5[46;5H[34h[?25h[?25l[1C[46m([62C)[0m[64;231H6[46;6H[34h[?25h[?25l([62C)[64;231H7[46;7H[34h[?25h[?25l[64;231H8[46;8H[34h[?25h[?25l[64;231H9[46;9H[34h[?25h[?25l[64;231H10[46;10H[34h[?25h[?25l[64;232H1[46;11H[34h[?25h[?25l[64;232H2[46;12H[34h[?25h[?25l[64;232H3[46;13H[34h[?25h[?25l[64;232H4[46;14H[34h[?25h[?25l[64;232H5[46;15H[34h[?25h[?25l[64;232H6[46;16H[34h[?25h[?25l[1C[31m[46m{[3C}[0m[64;232H7[46;17H[34h[?25h[?25l[31m{.2f}[0m[64;232H8[46;18H[34h[?25h[?25l[64;232H9[46;19H[34h[?25h[?25l[64;231H20[46;20H[34h[?25h[?25l[31m[46m{[3C}[0m[64;232H1[46;21H[34h[?25h[?25l[31m{.2f}[0m[64;232H2[46;22H[34h[?25h[?25l[31m[46m{[3C}[0m[64;232H1[46;21H[34h[?25h[?25l[31m{.2f}[0m[64;232H0[46;20H[34h[?25h[?25l[31m[46m{[3C}[0m[64;232H1[46;21H[34h[?25h[?25l[64;1H[1m-- INSERT --[0m[64;13H[K[64;228H46,21[9CAll[46;21H[34h[?25h[?25l[31m}[0m[31m[46m%[0m[31m"[0m.format([31m10[0m[1C * model_svc.score(x_test,y_pred)[46;69H[K[46;20H[31m[46m}[0m[31m%[0m[64;232H0[46;20H[34h[?25h[?25l[31m}[0m[31m[46m%[0m[31m"[0m.format([31m10[0m[1C * model_svc.score(x_test,y_pred)[46;68H[K[46;19H[31m[46m}[0m[31m%[0m[64;231H19[46;19H[34h[?25h[?25l[31m}[0m[31m[46m%[0m[31m"[0m.format([31m10[0m[1C * model_svc.score(x_test,y_pred)[46;67H[K[46;18H[31m[46m}[0m[31m%[0m[64;232H8[46;18H[34h[?25h[64;1H[K[46;17H[?25l[64;228H46,17[9CAll[46;17H[34h[?25h[?25l[64;228H[K[64;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"svm.py" 47L, 1855C written
+[?1l>[34h[?25h[?1049llbd2020@PrisLisi2:~/PRproject/svm$ vim svm.py[4@python3[C[C[C[C[C[C[C
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+2019-06-12 20:49:16
+/usr/local/lib/python3.5/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+2019-06-12 21:03:08
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+/usr/local/lib/python3.5/dist-packages/sklearn/utils/validation.py:595: DataConversionWarning: Data with input dtype uint8 was converted to float64 by StandardScaler.
+  warnings.warn(msg, DataConversionWarning)
+Accuracy:96.57%
+lbd2020@PrisLisi2:~/PRproject/svm$               [K[K[K[K[K[K[K[K[K[K[K[K[K[Kpython3 svm.py[Kexit
+
+Script done on Wednesday, June 12, 2019 PM09:42:19 CST
